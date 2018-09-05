@@ -1,0 +1,42 @@
+ body{
+     background: white url("images/white1.jpg");
+ }
+ *{
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        #total{
+            color: black;
+             border: 2px solid #555555;
+             margin-left:15px;
+            }
+        #total:hover{
+             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+             color: black;
+             border: 2px solid #555555;
+              margin-left:15px;
+               }
+
+         #printReceiptLabel{
+            margin-left:30px;
+         }
+         #printReceipt:hover{
+             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+             color: black;
+             border: 2px solid #555555;
+         }
+         #notification:hover, #chat:hover, #loyalty:hover, #seniorDisc:hover, #redeem:hover, #return:hover, #voidTrans:hover, #voidItem:hover,
+          #itemDetails:hover
+        {
+          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+             color: black;
+             border: 2px solid #555555;
+         }
+
+         #saveItem{
+            margin-top:5px;
+
+         }
+         .scrollable{
+         height:400px;
+         overflow: scroll;
+         }

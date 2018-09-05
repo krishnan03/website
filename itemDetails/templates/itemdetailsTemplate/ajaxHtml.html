@@ -1,0 +1,11 @@
+{% if searchItemList.count > 0 %}
+
+{% for item in searchItemList %}
+
+<li>{{searchItemList.productName}}</li>
+
+{% endfor %}
+{% else %}
+<li>Nothing to show</li>
+
+{% endif %}

@@ -1,0 +1,100 @@
+<! --- Load static files--->
+{% load staticfiles%}
+
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="{% static 'itemDetails/style.css' %}">
+<script src="{% static 'itemDetails/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'itemDetails/jquery.autocomplete.js' %}"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<ul class="nav nav-tabs">
+    <li><a href="{% url 'tpage:transactionPage'  %}">Transaction </a></li>
+    <li class="active"><a href="{% url 'itemDetails:itemDetails' %}">Item Details</a></li>
+    <li style="position:absolute; right:0;"><a href="#">Logout</a></li>
+</ul>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <form action="{% url 'itemDetails:addItem' %}" method="post">
+
+            <div class="form-group">
+                {% csrf_token %}
+                <div class="col-md-3"><input type="text" class="form-control" name="productName" placeholder="Scan / Enter Product Name" value="{{itemName}}"></div>
+                <div class="col-md-3"><input type="text" class="form-control" name="description" placeholder="Description" value="{{itemDesc}}"></div>
+                <div class="col-md-1"> <input type="text" class="form-control" name="wt" placeholder="Wt" value="{{itemWt}}"></div>
+                <div class="col-md-2"> <input type="text" class="form-control" name="price" placeholder="Price for EA" value="{{itemPrice}}"></div>
+                <div class="col-md-2"><button type="submit" id="saveItem" value="saveItem">Add Item</button>
+                    <a href="{% url 'itemDetails:itemDetails' %}" style="margin-left:15px;">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </a>
+                </div>
+
+            </div>
+        </form>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Weight</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            <tbody>
+            {% for item in itemList %}
+            {% if item.productName%}
+            <tr>
+                <td>{{item.productName}} </td>
+                <td>{{item.productDesc}} </td>
+                <td>{{item.productWt}} </td>
+                <td>{{item.productPrice}} </td>
+               <td>
+                   <form action="{% url 'itemDetails:deleteItem' item.id %}" method="post">
+                       {% csrf_token %}
+                       <input type="hidden" name="item-id" value="{{item.id}}" />
+                       <button type="submit"  style="background-color: transparent; border:0" >
+                        <a style="margin-right:10px;"><span class="glyphicon glyphicon-trash"></span></a>
+                       </button>
+                   </form>
+               </td>
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+
+<script>
+
+var arr= [];
+
+{% for item in itemList %}
+
+    arr.push("{{item.id}}~~~{{item.productName}}~~~{{item.productDesc}}~~~{{item.productWt}}");
+
+{% endfor %}
+
+$('#autocomplete').autocomplete({
+	lookup: arr
+});
+</script>
+
+</div>
